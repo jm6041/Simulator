@@ -1,66 +1,64 @@
-﻿using System.Configuration;
-using System.Messaging;
-using Tongfang.Simulator.Host.Properties;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel;
+using System.Text;
+using System.Threading.Tasks;
+using Tongfang.AuthMessage.Service;
 
 namespace Tongfang.Simulator.Host
 {
-    /// <summary>
-    /// MsMq帮助类
-    /// </summary>
-    public static class MsMqHelper
+    public class ServiceHostHelper
     {
-        /// <summary>
-        /// Sms服务的消息队列完整路径名
-        /// </summary>
-        public static readonly string QueueNameSmsService = ConfigurationManager.AppSettings["QueueNameSmsService"] ?? @".\private$\Simulator_MSMQ_Sms";
+        private static readonly Lazy<ServiceHostHelper> lazy = new Lazy<ServiceHostHelper>(() => new ServiceHostHelper());
+        public static ServiceHostHelper Instance { get { return lazy.Value; } }
+        private AppDomain _serviceHostDomain;
 
-        /// <summary>
-        /// Email服务的消息队列完整路径名
-        /// </summary>
-        public static readonly string QueueNameEmailService = ConfigurationManager.AppSettings["QueueNameEmailService"] ?? @".\private$\Simulator_MSMQ_Email";
+        private bool isOpen = false;
 
-        /// <summary>
-        /// 创建消息队列
-        /// </summary>
-        public static void CreateMsMq()
+        public void OpenServerHost()
         {
-            CreateSmsMq();
-            CreateEmailMq();
-        }
-
-        /// <summary>
-        /// 创建Sms消息队列
-        /// </summary>
-        /// <remarks>创建系统需要的消息队列</remarks>
-        public static void CreateSmsMq()
-        {
-            string queueName = QueueNameSmsService;
-            if (!MessageQueue.Exists(queueName))
+            if (!isOpen)
             {
-                MessageQueue mq = MessageQueue.Create(queueName, true);
-                mq.Label = Resources.MsMqLabelSms;
-                // 给管理员组赋完全控制权限
-                mq.SetPermissions("Administrators", MessageQueueAccessRights.FullControl);
-                // Windows Service 以SYSTEM组权限运行，因此在Windows Service中启动MSMQ，必须给SYSTEM组赋MSMQ完全控制权限
-                mq.SetPermissions("SYSTEM", MessageQueueAccessRights.FullControl);
+                _serviceHostDomain = AppDomain.CreateDomain("ServiceHostDomain");
+                _serviceHostDomain.DoCallBack(() =>
+                {
+                    PublishServiceHost publishServiceHost = new PublishServiceHost();
+                    publishServiceHost.Open();
+
+                    MessageServiceHost messageServiceHost = new MessageServiceHost();
+                    messageServiceHost.Open();
+                });
+                isOpen = true;
+
+                //_serviceHostDomain = AppDomain.CreateDomain("ServiceHostDomain");
+                //_messageServiceHost = (MessageServiceHost)_serviceHostDomain.CreateInstanceAndUnwrap(
+                //    MessageServiceHost.AssemblyName,
+                //    MessageServiceHost.TypeName);
+                //_publishServiceHost = (PublishServiceHost)_serviceHostDomain.CreateInstanceAndUnwrap(
+                //    PublishServiceHost.AssemblyName,
+                //    PublishServiceHost.TypeName);
+                //_serviceHostDomain.DoCallBack(() =>
+                //{
+                //    _messageServiceHost.Open();
+                //    _publishServiceHost.Open();
+                //});
+                //isOpen = true;
             }
         }
 
-        /// <summary>
-        /// 创建Email消息队列
-        /// </summary>
-        /// <remarks>创建系统需要的消息队列</remarks>
-        public static void CreateEmailMq()
+        public void CloseServerHost()
         {
-            string queueName = QueueNameEmailService;
-            if (!MessageQueue.Exists(queueName))
+            if (isOpen)
             {
-                MessageQueue mq = MessageQueue.Create(queueName, true);
-                mq.Label = Resources.MsMqLabelEmail;
-                // 给管理员组赋完全控制权限
-                mq.SetPermissions("Administrators", MessageQueueAccessRights.FullControl);
-                // Windows Service 以SYSTEM组权限运行，因此在Windows Service中启动MSMQ，必须给SYSTEM组赋MSMQ完全控制权限
-                mq.SetPermissions("SYSTEM", MessageQueueAccessRights.FullControl);
+                //_serviceHostDomain.DoCallBack(() =>
+                //{
+                //    _serviceHostDomain.
+                //    _messageServiceHost?.Close();
+                //    _publishServiceHost?.Close();
+                //});
+                AppDomain.Unload(_serviceHostDomain);
+                isOpen = false;
             }
         }
     }

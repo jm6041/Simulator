@@ -16,12 +16,10 @@ namespace Tongfang.Simulator.Host
 {
     public partial class MainForm : Form
     {
-        private ServiceHost _serviceHostMessage;
 
         public MainForm()
         {
             InitializeComponent();
-            InitServiceHost();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -29,12 +27,20 @@ namespace Tongfang.Simulator.Host
             OpenServiceHost();
         }
 
-        private void InitServiceHost()
+        private void OpenServiceHost()
         {
-            MsMqHelper.CreateMsMq();
-            _serviceHostMessage = new ServiceHost(typeof(MessageService));
-            _serviceHostMessage.Opened += ServiceHostMessage_Opened;
-            _serviceHostMessage.Closed += ServiceHostMessage_Closed;
+            ServiceHostHelper.Instance.OpenServerHost();
+            AppendState(Resources.MqStart);
+            btnStart.Enabled = false;
+            btnClose.Enabled = true;
+        }
+
+        private void CloseServiceHost()
+        {
+            ServiceHostHelper.Instance.CloseServerHost();
+            AppendState(Resources.MqEnd);
+            btnStart.Enabled = true;
+            btnClose.Enabled = false;
         }
 
         private void ServiceHostMessage_Opened(object sender, EventArgs e)
@@ -49,16 +55,6 @@ namespace Tongfang.Simulator.Host
             AppendState(Resources.MqEnd);
             btnStart.Enabled = true;
             btnClose.Enabled = false;
-        }
-
-        private void OpenServiceHost()
-        {
-            _serviceHostMessage?.Open();
-        }
-
-        private void CloseServiceHost()
-        {
-            _serviceHostMessage?.Close();
         }
 
         private delegate void DelegateUpdateUIPro(string content);
@@ -81,7 +77,7 @@ namespace Tongfang.Simulator.Host
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            throw new ArgumentException("模拟异常", new ArgumentNullException("模拟内部异常"));
+            OpenServiceHost();
         }
 
         private void ExceptionHandler(Exception ex)
@@ -99,7 +95,33 @@ namespace Tongfang.Simulator.Host
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            throw new ArgumentException("模拟异常", new ArgumentNullException("模拟内部异常"));
+            CloseServiceHost();
+        }
+
+        private void AppendMessage(string msg)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("--------------------{0:yyyy-MM-dd HH:mm:ss:ffff} 收到消息--------------------", DateTime.Now);
+            sb.AppendLine();
+            sb.Append(msg);
+            sb.Append("----------------------------------------------------");
+            string text = sb.ToString();
+            if (textState.InvokeRequired)
+            {
+                this.BeginInvoke(new DelegateUpdateUIPro((x) =>
+                {
+                    textContent.AppendText(x);
+                }));
+            }
+            else
+            {
+                textContent.AppendText(text);
+            }
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            CloseServiceHost();
         }
     }
 }

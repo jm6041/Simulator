@@ -31,10 +31,8 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxMessage = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelReceiver = new System.Windows.Forms.Label();
             this.labelContent = new System.Windows.Forms.Label();
             this.textContent = new System.Windows.Forms.RichTextBox();
-            this.textReceiver = new System.Windows.Forms.TextBox();
             this.groupBoxState = new System.Windows.Forms.GroupBox();
             this.textState = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -84,34 +82,22 @@
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
-            this.tableLayoutPanel3.Controls.Add(this.labelReceiver, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.labelContent, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textContent, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textReceiver, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.labelContent, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.textContent, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 423F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(772, 423);
             this.tableLayoutPanel3.TabIndex = 2;
-            // 
-            // labelReceiver
-            // 
-            this.labelReceiver.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelReceiver.AutoSize = true;
-            this.labelReceiver.Location = new System.Drawing.Point(21, 15);
-            this.labelReceiver.Name = "labelReceiver";
-            this.labelReceiver.Size = new System.Drawing.Size(53, 12);
-            this.labelReceiver.TabIndex = 0;
-            this.labelReceiver.Text = "收件人：";
             // 
             // labelContent
             // 
             this.labelContent.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelContent.AutoSize = true;
-            this.labelContent.Location = new System.Drawing.Point(33, 226);
+            this.labelContent.Location = new System.Drawing.Point(33, 205);
             this.labelContent.Name = "labelContent";
             this.labelContent.Size = new System.Drawing.Size(41, 12);
             this.labelContent.TabIndex = 1;
@@ -120,19 +106,11 @@
             // textContent
             // 
             this.textContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textContent.Location = new System.Drawing.Point(80, 45);
+            this.textContent.Location = new System.Drawing.Point(80, 3);
             this.textContent.Name = "textContent";
-            this.textContent.Size = new System.Drawing.Size(689, 375);
+            this.textContent.Size = new System.Drawing.Size(689, 417);
             this.textContent.TabIndex = 2;
             this.textContent.Text = "";
-            // 
-            // textReceiver
-            // 
-            this.textReceiver.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textReceiver.Location = new System.Drawing.Point(80, 10);
-            this.textReceiver.Name = "textReceiver";
-            this.textReceiver.Size = new System.Drawing.Size(689, 21);
-            this.textReceiver.TabIndex = 3;
             // 
             // groupBoxState
             // 
@@ -214,6 +192,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MainForm";
             this.Text = "SimulatorForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBoxMessage.ResumeLayout(false);
@@ -231,10 +210,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBoxMessage;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Label labelReceiver;
         private System.Windows.Forms.Label labelContent;
         private System.Windows.Forms.RichTextBox textContent;
-        private System.Windows.Forms.TextBox textReceiver;
         private System.Windows.Forms.GroupBox groupBoxState;
         private System.Windows.Forms.RichTextBox textState;
         private System.Windows.Forms.GroupBox groupBox1;

@@ -14,6 +14,7 @@ namespace Tongfang.Simulator.Host
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
+        [LoaderOptimization(LoaderOptimization.MultiDomain)]
         static void Main()
         {
             try

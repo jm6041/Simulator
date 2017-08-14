@@ -8,12 +8,11 @@ using Tongfang.AuthMessage.Service;
 
 namespace Tongfang.Simulator.Host
 {
-    public class ServiceHostHelper
+    public sealed class ServiceHostHelper
     {
         private static readonly Lazy<ServiceHostHelper> lazy = new Lazy<ServiceHostHelper>(() => new ServiceHostHelper());
         public static ServiceHostHelper Instance { get { return lazy.Value; } }
         private AppDomain _serviceHostDomain;
-        private AppDomain _messageServiceHostDomain;
 
         private bool isOpen = false;
 
@@ -26,29 +25,11 @@ namespace Tongfang.Simulator.Host
                 {
                     PublishServiceHost publishServiceHost = new PublishServiceHost();
                     publishServiceHost.Open();
-                });
-                isOpen = true;
 
-                _messageServiceHostDomain = AppDomain.CreateDomain("ServiceHostDomain2");
-                _messageServiceHostDomain.DoCallBack(() =>
-                {
                     MessageServiceHost messageServiceHost = new MessageServiceHost();
                     messageServiceHost.Open();
                 });
-
-                //_serviceHostDomain = AppDomain.CreateDomain("ServiceHostDomain");
-                //_messageServiceHost = (MessageServiceHost)_serviceHostDomain.CreateInstanceAndUnwrap(
-                //    MessageServiceHost.AssemblyName,
-                //    MessageServiceHost.TypeName);
-                //_publishServiceHost = (PublishServiceHost)_serviceHostDomain.CreateInstanceAndUnwrap(
-                //    PublishServiceHost.AssemblyName,
-                //    PublishServiceHost.TypeName);
-                //_serviceHostDomain.DoCallBack(() =>
-                //{
-                //    _messageServiceHost.Open();
-                //    _publishServiceHost.Open();
-                //});
-                //isOpen = true;
+                isOpen = true;
             }
         }
 
@@ -56,14 +37,7 @@ namespace Tongfang.Simulator.Host
         {
             if (isOpen)
             {
-                //_serviceHostDomain.DoCallBack(() =>
-                //{
-                //    _serviceHostDomain.
-                //    _messageServiceHost?.Close();
-                //    _publishServiceHost?.Close();
-                //});
                 AppDomain.Unload(_serviceHostDomain);
-                AppDomain.Unload(_messageServiceHostDomain);
                 isOpen = false;
             }
         }

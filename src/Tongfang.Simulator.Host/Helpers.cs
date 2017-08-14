@@ -13,6 +13,7 @@ namespace Tongfang.Simulator.Host
         private static readonly Lazy<ServiceHostHelper> lazy = new Lazy<ServiceHostHelper>(() => new ServiceHostHelper());
         public static ServiceHostHelper Instance { get { return lazy.Value; } }
         private AppDomain _serviceHostDomain;
+        private AppDomain _messageServiceHostDomain;
 
         private bool isOpen = false;
 
@@ -25,11 +26,15 @@ namespace Tongfang.Simulator.Host
                 {
                     PublishServiceHost publishServiceHost = new PublishServiceHost();
                     publishServiceHost.Open();
+                });
+                isOpen = true;
 
+                _messageServiceHostDomain = AppDomain.CreateDomain("ServiceHostDomain2");
+                _messageServiceHostDomain.DoCallBack(() =>
+                {
                     MessageServiceHost messageServiceHost = new MessageServiceHost();
                     messageServiceHost.Open();
                 });
-                isOpen = true;
 
                 //_serviceHostDomain = AppDomain.CreateDomain("ServiceHostDomain");
                 //_messageServiceHost = (MessageServiceHost)_serviceHostDomain.CreateInstanceAndUnwrap(
@@ -58,6 +63,7 @@ namespace Tongfang.Simulator.Host
                 //    _publishServiceHost?.Close();
                 //});
                 AppDomain.Unload(_serviceHostDomain);
+                AppDomain.Unload(_messageServiceHostDomain);
                 isOpen = false;
             }
         }

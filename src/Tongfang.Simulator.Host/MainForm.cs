@@ -16,6 +16,8 @@ namespace Tongfang.Simulator.Host
 {
     public partial class MainForm : Form
     {
+        private PublishClientWrapper _client;
+        private Guid _clientId;
 
         public MainForm()
         {
@@ -25,6 +27,7 @@ namespace Tongfang.Simulator.Host
         private void MainForm_Load(object sender, EventArgs e)
         {
             OpenServiceHost();
+            InitPublishClient();
         }
 
         private void OpenServiceHost()
@@ -43,18 +46,17 @@ namespace Tongfang.Simulator.Host
             btnClose.Enabled = false;
         }
 
-        private void ServiceHostMessage_Opened(object sender, EventArgs e)
+        private void InitPublishClient()
         {
-            AppendState(Resources.MqStart);
-            btnStart.Enabled = false;
-            btnClose.Enabled = true;
+            PublishCallback clientCallback = new PublishCallback();
+            clientCallback.ClientReceived += ClientCallback_ClientReceived;
+            _client = new PublishClientWrapper(clientCallback, "PublishServiceInnerClient");
+            _clientId = _client.Subscribe();
         }
 
-        private void ServiceHostMessage_Closed(object sender, EventArgs e)
+        private void ClientCallback_ClientReceived(object sender, ClientReceivedEventArgs e)
         {
-            AppendState(Resources.MqEnd);
-            btnStart.Enabled = true;
-            btnClose.Enabled = false;
+            AppendMessage(e.Message);
         }
 
         private delegate void DelegateUpdateUIPro(string content);
@@ -101,10 +103,11 @@ namespace Tongfang.Simulator.Host
         private void AppendMessage(string msg)
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("--------------------{0:yyyy-MM-dd HH:mm:ss:ffff} 收到消息--------------------", DateTime.Now);
+            sb.AppendFormat("---------------{0:yyyy-MM-dd HH:mm:ss:ffff} 收到消息---------------", DateTime.Now);
             sb.AppendLine();
             sb.Append(msg);
-            sb.Append("----------------------------------------------------");
+            sb.AppendLine();
+            sb.AppendLine("---------------------------------------------------------------");
             string text = sb.ToString();
             if (textState.InvokeRequired)
             {

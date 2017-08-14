@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,8 +19,13 @@ namespace Tongfang.AuthMessage.Service
         /// </summary>
         /// <param name="callbackInstance"><see cref="InstanceContext"/></param>
         /// <param name="endpointConfigurationName">终结点配置名</param>
-        public PublishServiceClient(InstanceContext callbackInstance, string endpointConfigurationName) :
-                base(callbackInstance, endpointConfigurationName)
+        public PublishServiceClient(InstanceContext callbackInstance, string endpointConfigurationName) 
+            :                base(callbackInstance, endpointConfigurationName)
+        {
+        }
+
+        public PublishServiceClient(object callbackInstance, ServiceEndpoint endpoint)
+            : base(callbackInstance, endpoint)
         {
         }
 

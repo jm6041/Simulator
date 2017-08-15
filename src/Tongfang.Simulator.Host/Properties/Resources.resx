@@ -117,16 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MqEnd" xml:space="preserve">
-    <value>消息队列关闭</value>
-  </data>
-  <data name="MqStart" xml:space="preserve">
-    <value>消息队列打开</value>
-  </data>
-  <data name="MsMqLabelEmail" xml:space="preserve">
-    <value>模拟Email消息接收</value>
-  </data>
-  <data name="MsMqLabelSms" xml:space="preserve">
-    <value>模拟Sms消息接收</value>
-  </data>
 </root>

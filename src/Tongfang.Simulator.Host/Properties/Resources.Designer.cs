@@ -19,7 +19,7 @@ namespace Tongfang.Simulator.Host.Properties {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,42 +57,6 @@ namespace Tongfang.Simulator.Host.Properties {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 消息队列关闭 的本地化字符串。
-        /// </summary>
-        internal static string MqEnd {
-            get {
-                return ResourceManager.GetString("MqEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 消息队列打开 的本地化字符串。
-        /// </summary>
-        internal static string MqStart {
-            get {
-                return ResourceManager.GetString("MqStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 模拟Email消息接收 的本地化字符串。
-        /// </summary>
-        internal static string MsMqLabelEmail {
-            get {
-                return ResourceManager.GetString("MsMqLabelEmail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 模拟Sms消息接收 的本地化字符串。
-        /// </summary>
-        internal static string MsMqLabelSms {
-            get {
-                return ResourceManager.GetString("MsMqLabelSms", resourceCulture);
             }
         }
     }

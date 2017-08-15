@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -20,6 +21,11 @@ namespace Tongfang.Simulator.Host
         private PublishClientWrapper _client;
         private Guid _clientId;
 
+        /// <summary>
+        /// Excel模板文件
+        /// </summary>
+        private static readonly string AppType = ConfigurationManager.AppSettings["AppType"] ?? "Server";
+
         public MainForm()
         {
             InitializeComponent();
@@ -34,16 +40,19 @@ namespace Tongfang.Simulator.Host
 
         private void InitRunner()
         {
-            _runner = ServiceHostRunner.Instance;
-            _runner.PublishServiceHostOpening += Runner_PublishServiceHostOpening;
-            _runner.PublishServiceHostOpened += Runner_PublishServiceHostOpened;
-            _runner.PublishServiceHostClosing += Runner_PublishServiceHostClosing;
-            _runner.PublishServiceHostClosed += Runner_PublishServiceHostClosed;
+            if (AppType.ToUpper().Contains("Server".ToUpper()))
+            {
+                _runner = ServiceHostRunner.Instance;
+                _runner.PublishServiceHostOpening += Runner_PublishServiceHostOpening;
+                _runner.PublishServiceHostOpened += Runner_PublishServiceHostOpened;
+                _runner.PublishServiceHostClosing += Runner_PublishServiceHostClosing;
+                _runner.PublishServiceHostClosed += Runner_PublishServiceHostClosed;
 
-            _runner.MessageServiceHostOpening += Runner_MessageServiceHostOpening;
-            _runner.MessageServiceHostOpened += Runner_MessageServiceHostOpened;
-            _runner.MessageServiceHostClosing += Runner_MessageServiceHostClosing;
-            _runner.MessageServiceHostClosed += Runner_MessageServiceHostClosed;
+                _runner.MessageServiceHostOpening += Runner_MessageServiceHostOpening;
+                _runner.MessageServiceHostOpened += Runner_MessageServiceHostOpened;
+                _runner.MessageServiceHostClosing += Runner_MessageServiceHostClosing;
+                _runner.MessageServiceHostClosed += Runner_MessageServiceHostClosed;
+            }
         }
 
         private void Runner_MessageServiceHostClosed(object sender, EventArgs e)
@@ -88,14 +97,14 @@ namespace Tongfang.Simulator.Host
 
         private void OpenServiceHost()
         {
-            _runner.Open();
+            _runner?.Open();
             btnStart.Enabled = false;
             btnClose.Enabled = true;
         }
 
         private void CloseServiceHost()
         {
-            _runner.Close();
+            _runner?.Close();
             btnStart.Enabled = true;
             btnClose.Enabled = false;
         }
@@ -107,6 +116,7 @@ namespace Tongfang.Simulator.Host
             _client = new PublishClientWrapper(clientCallback, "PublishServiceInnerClient");
             _clientId = _client.Subscribe();
             ShowConnectCount(_client.GetConnectCount());
+            AppendState(string.Format("连接发布服务器成功，客户端ID:{0}", _clientId));
         }
 
         private void ClientCallback_ClientReceived(object sender, ClientReceivedEventArgs e)

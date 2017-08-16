@@ -221,12 +221,18 @@ namespace Tongfang.Simulator.Host
         private void btnClean_Click(object sender, EventArgs e)
         {
             textContent.Clear();
-            labelContent.Text = "内容({0})";
+            labelContent.Text = "内容(0)";
         }
 
         private void btnCleanState_Click(object sender, EventArgs e)
         {
             textState.Clear();
+        }
+
+        private void btnOpenWebBrowser_Click(object sender, EventArgs e)
+        {
+            WebBrowserForm form = new WebBrowserForm(this.textContent.Text);
+            form.Show(this);
         }
     }
 }

@@ -30,11 +30,13 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxMessage = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanelContent = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textContent = new System.Windows.Forms.RichTextBox();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelContent = new System.Windows.Forms.Label();
             this.btnClean = new System.Windows.Forms.Button();
+            this.btnOpenWebBrowser = new System.Windows.Forms.Button();
             this.groupBoxState = new System.Windows.Forms.GroupBox();
             this.textState = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -42,17 +44,18 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnShowError = new System.Windows.Forms.Button();
+            this.btnCleanState = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textSend = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelLinkCount = new System.Windows.Forms.Label();
             this.linkLabelCount = new System.Windows.Forms.LinkLabel();
             this.btnSend = new System.Windows.Forms.Button();
-            this.btnCleanState = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBoxMessage.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanelContent.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
             this.groupBoxState.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -83,7 +86,7 @@
             // groupBoxMessage
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.groupBoxMessage, 2);
-            this.groupBoxMessage.Controls.Add(this.tableLayoutPanel3);
+            this.groupBoxMessage.Controls.Add(this.tableLayoutPanelContent);
             this.groupBoxMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxMessage.Location = new System.Drawing.Point(3, 115);
             this.groupBoxMessage.Name = "groupBoxMessage";
@@ -92,46 +95,58 @@
             this.groupBoxMessage.TabStop = false;
             this.groupBoxMessage.Text = "接收内容";
             // 
-            // tableLayoutPanel3
+            // tableLayoutPanelContent
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
-            this.tableLayoutPanel3.Controls.Add(this.textContent, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.flowLayoutPanel2, 0, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 17);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 310F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(772, 310);
-            this.tableLayoutPanel3.TabIndex = 2;
+            this.tableLayoutPanelContent.ColumnCount = 1;
+            this.tableLayoutPanelContent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelContent.Controls.Add(this.groupBox3, 0, 0);
+            this.tableLayoutPanelContent.Controls.Add(this.flowLayoutPanel3, 0, 1);
+            this.tableLayoutPanelContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelContent.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanelContent.Name = "tableLayoutPanelContent";
+            this.tableLayoutPanelContent.RowCount = 2;
+            this.tableLayoutPanelContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanelContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelContent.Size = new System.Drawing.Size(772, 310);
+            this.tableLayoutPanelContent.TabIndex = 5;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textContent);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(766, 265);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "文本";
             // 
             // textContent
             // 
             this.textContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textContent.Location = new System.Drawing.Point(80, 3);
+            this.textContent.Location = new System.Drawing.Point(3, 17);
             this.textContent.Name = "textContent";
-            this.textContent.Size = new System.Drawing.Size(689, 304);
-            this.textContent.TabIndex = 2;
+            this.textContent.Size = new System.Drawing.Size(760, 245);
+            this.textContent.TabIndex = 4;
             this.textContent.Text = "";
             // 
-            // flowLayoutPanel2
+            // flowLayoutPanel3
             // 
-            this.flowLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.flowLayoutPanel2.Controls.Add(this.labelContent);
-            this.flowLayoutPanel2.Controls.Add(this.btnClean);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 135);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(71, 40);
-            this.flowLayoutPanel2.TabIndex = 3;
+            this.flowLayoutPanel3.Controls.Add(this.labelContent);
+            this.flowLayoutPanel3.Controls.Add(this.btnClean);
+            this.flowLayoutPanel3.Controls.Add(this.btnOpenWebBrowser);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 274);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(766, 33);
+            this.flowLayoutPanel3.TabIndex = 3;
             // 
             // labelContent
             // 
             this.labelContent.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelContent.AutoSize = true;
-            this.labelContent.Location = new System.Drawing.Point(3, 0);
+            this.labelContent.Location = new System.Drawing.Point(3, 8);
             this.labelContent.Name = "labelContent";
             this.labelContent.Size = new System.Drawing.Size(47, 12);
             this.labelContent.TabIndex = 2;
@@ -139,13 +154,24 @@
             // 
             // btnClean
             // 
-            this.btnClean.Location = new System.Drawing.Point(3, 15);
+            this.btnClean.Location = new System.Drawing.Point(56, 3);
             this.btnClean.Name = "btnClean";
-            this.btnClean.Size = new System.Drawing.Size(40, 23);
+            this.btnClean.Size = new System.Drawing.Size(80, 23);
             this.btnClean.TabIndex = 3;
-            this.btnClean.Text = "清空";
+            this.btnClean.Text = "清空内容";
             this.btnClean.UseVisualStyleBackColor = true;
             this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
+            // 
+            // btnOpenWebBrowser
+            // 
+            this.btnOpenWebBrowser.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOpenWebBrowser.Location = new System.Drawing.Point(142, 3);
+            this.btnOpenWebBrowser.Name = "btnOpenWebBrowser";
+            this.btnOpenWebBrowser.Size = new System.Drawing.Size(140, 23);
+            this.btnOpenWebBrowser.TabIndex = 6;
+            this.btnOpenWebBrowser.Text = "用WebBrowser打开";
+            this.btnOpenWebBrowser.UseVisualStyleBackColor = true;
+            this.btnOpenWebBrowser.Click += new System.EventHandler(this.btnOpenWebBrowser_Click);
             // 
             // groupBoxState
             // 
@@ -220,6 +246,16 @@
             this.btnShowError.UseVisualStyleBackColor = true;
             this.btnShowError.Click += new System.EventHandler(this.btnShowError_Click);
             // 
+            // btnCleanState
+            // 
+            this.btnCleanState.Location = new System.Drawing.Point(84, 61);
+            this.btnCleanState.Name = "btnCleanState";
+            this.btnCleanState.Size = new System.Drawing.Size(40, 23);
+            this.btnCleanState.TabIndex = 4;
+            this.btnCleanState.Text = "清空";
+            this.btnCleanState.UseVisualStyleBackColor = true;
+            this.btnCleanState.Click += new System.EventHandler(this.btnCleanState_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.textSend);
@@ -281,16 +317,6 @@
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
-            // btnCleanState
-            // 
-            this.btnCleanState.Location = new System.Drawing.Point(84, 61);
-            this.btnCleanState.Name = "btnCleanState";
-            this.btnCleanState.Size = new System.Drawing.Size(40, 23);
-            this.btnCleanState.TabIndex = 4;
-            this.btnCleanState.Text = "清空";
-            this.btnCleanState.UseVisualStyleBackColor = true;
-            this.btnCleanState.Click += new System.EventHandler(this.btnCleanState_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -303,9 +329,10 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBoxMessage.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.flowLayoutPanel2.PerformLayout();
+            this.tableLayoutPanelContent.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel3.PerformLayout();
             this.groupBoxState.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -320,8 +347,6 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox groupBoxMessage;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.RichTextBox textContent;
         private System.Windows.Forms.GroupBox groupBoxState;
         private System.Windows.Forms.RichTextBox textState;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -329,16 +354,20 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnShowError;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Label labelContent;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RichTextBox textSend;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.LinkLabel linkLabelCount;
         private System.Windows.Forms.Label labelLinkCount;
-        private System.Windows.Forms.Button btnClean;
         private System.Windows.Forms.Button btnCleanState;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelContent;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.Label labelContent;
+        private System.Windows.Forms.Button btnOpenWebBrowser;
+        private System.Windows.Forms.Button btnClean;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RichTextBox textContent;
     }
 }
 
